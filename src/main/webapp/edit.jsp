@@ -11,7 +11,7 @@
     Connection connection = null;
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/dam2m06uf4", "root", "");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/MP0613_jsp", "root", "");
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id=?");
         statement.setInt(1, userId);
         ResultSet resultSet = statement.executeQuery();
@@ -102,18 +102,22 @@
     <h1>Edit User</h1>
 
     <% if (user != null) { %>
-    <form action="users?action=edit" method="get">
-        <input type="hidden" name="id" value="<%= user.getId() %>">
-        <div class="form-group">
-            <label for="name" class="form-label">Name:</label>
-            <input type="text" id="name" name="name" value="<%= user.getName() %>" required>
-        </div>
-        <div class="form-group">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" id="email" name="email" value="<%= user.getEmail() %>" required>
-        </div>
-        <input type="submit" value="Update User">
-    </form>
+    <form action="users" method="post">
+	    <input type="hidden" name="action" value="update">
+	    <input type="hidden" name="id" value="<%= user.getId() %>">
+	
+	    <div class="form-group">
+	        <label for="name" class="form-label">Name:</label>
+	        <input type="text" id="name" name="name" value="<%= user.getName() %>" required>
+	    </div>
+	
+	    <div class="form-group">
+	        <label for="email" class="form-label">Email:</label>
+	        <input type="email" id="email" name="email" value="<%= user.getEmail() %>" required>
+	    </div>
+	
+	    <input type="submit" value="Update User">
+	</form>
     <% } %>
 
     <a href="users">Back to User List</a>
