@@ -55,10 +55,13 @@ public class UserServlet extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String action = request.getParameter("action");
 
         if ("add".equals(action)) {
             addUser(request, response);
+        } else if ("update".equals(action)) {
+            editUser(request, response);
         }
     }
 
